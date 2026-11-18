@@ -24,11 +24,15 @@ Agent products may use different skill locations or invocation conventions; adju
 
 Invoke the relevant skill by name in a compatible coding agent:
 
-- `explain-changes`: summarize the current diff or a specified PR/branch/path.
-- `review`: review a diff without edits; add `--fix` to request targeted fixes after review.
-- `simplify`: clean up the scoped changes and run relevant checks.
+- `explain-changes`: summarize the current diff or a specified PR/branch/commit/path.
+- `review`: review the current diff or a specified PR/branch/path without edits; add `--fix` to request targeted fixes after review.
+- `simplify`: clean up the current diff or a specified PR/branch/commit/range/path and run relevant checks.
+
+With no target, each skill compares against the PR base or default-branch merge base (then upstream, then `HEAD~1`) and includes uncommitted and relevant untracked changes.
 
 These skills work independently. `review` deliberately overlaps with the cleanup angles of `simplify`, but only the latter automatically applies improvements.
+
+`review` reports findings through a `ReportFindings` tool when the agent provides one, and otherwise falls back to a plain severity-ordered list.
 
 ## Design principles
 
