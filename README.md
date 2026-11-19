@@ -28,7 +28,7 @@ Invoke the relevant skill by name in a compatible coding agent:
 - `review`: review the current diff or a specified PR/branch/path without edits; add `--fix` to request targeted fixes after review.
 - `simplify`: clean up the current diff or a specified PR/branch/commit/range/path and run relevant checks.
 
-With no target, each skill compares against the PR base or default-branch merge base (then upstream, then `HEAD~1`) and includes uncommitted and relevant untracked changes.
+With no target, each skill covers uncommitted changes only (staged, unstaged, and relevant untracked), on any branch. To include committed work, pass the branch or PR as the target. If nothing is found, the skill says so and stops; it never searches other branches, worktrees, or past commits unless you pass a target.
 
 These skills work independently. `review` deliberately overlaps with the cleanup angles of `simplify`, but only the latter automatically applies improvements.
 

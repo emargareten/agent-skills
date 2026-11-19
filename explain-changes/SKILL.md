@@ -10,12 +10,12 @@ Explain **what changed and why**, in plain, concise language. This is a summary,
 
 ## 1. Identify the scope
 
-- If an argument specifies a PR, branch, commit, or file path, inspect that target using the available Git/hosting tools.
-- Otherwise, determine the actual PR target branch when available and compare from its merge base. If unavailable, use the repository default branch, then a suitable upstream tracking branch, then `HEAD~1` as a last resort. Do not assume upstream is the PR base.
+- If an argument specifies a PR, branch, commit, or file path, inspect that target using the available Git/hosting tools. Compare a PR against its actual base; do not assume upstream is the PR base. A file path restricts scope to that path (alone: uncommitted changes within that path; with a PR/branch/commit target: that diff within that path).
+- Otherwise, explain uncommitted changes only, on any branch. Do not search unrelated branches, other worktrees, or past commits for changes unless explicitly targeted.
 - Include uncommitted tracked changes (`git diff HEAD`) when present, and staged changes as part of that diff. Avoid double-counting overlapping changes.
 - Identify untracked files with `git status --short`; inspect relevant new files if they are part of the requested work.
 - Use `git diff --stat` and `git status --short` to establish the full file list. For renamed files, examine the rename and content changes separately.
-- If the requested diff is empty, say so rather than inventing changes.
+- If the entire resolved scope (any explicitly targeted diff plus relevant uncommitted changes) is empty, say so and stop rather than inventing changes.
 
 ## 2. Understand the intent
 
